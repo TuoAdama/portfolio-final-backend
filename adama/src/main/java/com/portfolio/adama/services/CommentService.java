@@ -18,9 +18,10 @@ public class CommentService {
         this.commentMapper = commentMapper;
     }
 
-    public Comment create(CommentRequest commentRequest) {
+    public CommentResponse create(CommentRequest commentRequest) {
         Comment comment = this.commentMapper.fromRequestToComment(commentRequest);
-        return this.commentRepository.save(comment);
+        this.commentRepository.save(comment);
+        return this.commentMapper.fromCommentToResponse(comment);
     }
 
     public List<CommentResponse> getAll() {
