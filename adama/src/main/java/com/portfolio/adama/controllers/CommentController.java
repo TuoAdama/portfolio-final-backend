@@ -1,4 +1,4 @@
-package com.portfolio.adama.comments;
+package com.portfolio.adama.controllers;
 
 import com.portfolio.adama.requests.CommentRequest;
 import com.portfolio.adama.responses.CommentResponse;
