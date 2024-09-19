@@ -1,4 +1,8 @@
 package com.portfolio.adama.requests;
 
-public class CommentRequest {
+public record CommentRequest(
+        String email,
+        String subject,
+        String body
+) {
 }

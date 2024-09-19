@@ -11,10 +11,4 @@ public class PortfolioApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PortfolioApplication.class, args);
 	}
-
-
-	@GetMapping("/hello")
-	public String app(){
-		return "Hello, world";
-	}
 }
