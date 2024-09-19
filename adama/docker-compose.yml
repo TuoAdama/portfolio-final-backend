@@ -1,21 +1,31 @@
-version: "3.0"
+version: "3.8"
 
 services:
-  spring-app:
-    restart: always
+  springapp:
+    restart: on-failure
     build: .
-    env_file:
-      - .env
+    environment:
+      MYSQL_DATABASE: portfolio
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_HOST: mysqldb
+      MYSQL_PORT: 3306
     ports:
       - "80:8080"
     depends_on:
-      - mysql-db
-  mysql-db:
+      - mysqldb
+  mysqldb:
     image: mysql:8.0.39
     ports:
       - "3306:3306"
-    env_file:
-      - .env
+    environment:
+      MYSQL_DATABASE: portfolio
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_HOST: mysqldb
+      MYSQL_PORT: 3306
     volumes:
       - db:/var/lib/mysql
 
