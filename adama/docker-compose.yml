@@ -8,6 +8,8 @@ services:
       - .env
     ports:
       - "80:8080"
+      - "443:443"
+      - "8443:8443"
     volumes:
       - .:/home
     depends_on:
