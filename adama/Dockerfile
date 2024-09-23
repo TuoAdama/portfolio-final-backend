@@ -8,6 +8,6 @@ RUN mvn clean package -DskipTests
 FROM openjdk:17-jdk-alpine
 WORKDIR /app
 COPY --from=maven-build /app/target/*.jar /app/app-build.jar
-EXPOSE 8080
+EXPOSE 8443
 
 ENTRYPOINT ["java", "-jar", "app-build.jar"]
