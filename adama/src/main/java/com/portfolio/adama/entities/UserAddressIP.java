@@ -18,5 +18,5 @@ public class UserAddressIP {
     private Long id;
     private String ip;
 
-    private LocalDateTime created;
+    private LocalDateTime createdAt;
 }

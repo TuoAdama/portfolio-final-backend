@@ -18,7 +18,7 @@ public class UserAddressIPService {
     public UserAddressIP create(String ip) {
         UserAddressIP userAddressIP = new UserAddressIP();
         userAddressIP.setIp(ip);
-        userAddressIP.setCreated(LocalDateTime.now());
+        userAddressIP.setCreatedAt(LocalDateTime.now());
         return userAddressIPRepository.save(userAddressIP);
     }
 
