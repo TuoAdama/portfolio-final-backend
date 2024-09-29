@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/analytics")
+@RequestMapping("/api")
 public class AnalyticController {
 
     private final UserAddressIPService userAddressIPService;
@@ -19,12 +19,12 @@ public class AnalyticController {
         this.userAddressIPService = userAddressIPService;
     }
 
-    @PostMapping
+    @PostMapping("/analytics")
     public @ResponseBody void getAnalytics(HttpServletRequest request) {
         this.userAddressIPService.create(request.getRemoteAddr());
     }
 
-    @GetMapping
+    @GetMapping("/admin/analytics")
     public @ResponseBody List<UserAddressIP> getAnalytics() {
         return this.userAddressIPService.getAll();
     }
