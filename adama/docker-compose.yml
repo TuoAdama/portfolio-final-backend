@@ -2,6 +2,11 @@ services:
   springapp:
     restart: on-failure
     build: .
+    develop:
+      watch:
+        - action: rebuild
+          path: .
+          target: /app
     env_file:
       - .env
     ports:
