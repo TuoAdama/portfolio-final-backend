@@ -8,6 +8,7 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.security.Key;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.function.Function;
 
@@ -33,6 +34,15 @@ public class JwtService {
                 .setExpiration(null)
                 .signWith(this.getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
+    }
+
+    public boolean isTokenValid(String token, UserDetails userDetails) {
+        String username = this.extractUsername(token);
+        return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
+    }
+
+    public boolean isTokenExpired(String token) {
+        return extractClaim(token, Claims::getExpiration).before(new Date());
     }
 
 
