@@ -18,14 +18,14 @@ public class CommentAdminController {
 
     @GetMapping
     public @ResponseBody ResponseEntity<List<CommentResponse>> getAll(){
-        return ResponseEntity.status(HttpStatus.CREATED).body(
+        return ResponseEntity.status(HttpStatus.OK).body(
                 this.commentService.getAll()
         );
     }
 
     @GetMapping("/{id}")
     public @ResponseBody ResponseEntity<CommentResponse> getById(@PathVariable Long id){
-        return ResponseEntity.status(HttpStatus.CREATED).body(
+        return ResponseEntity.status(HttpStatus.OK).body(
                 this.commentService.getById(id)
         );
     }
