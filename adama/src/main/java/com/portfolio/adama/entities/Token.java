@@ -2,11 +2,13 @@ package com.portfolio.adama.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Token {
 
     @Id
@@ -14,6 +16,6 @@ public class Token {
     private Long id;
     private String token;
     private Date expiryDate;
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     private User user;
 }
