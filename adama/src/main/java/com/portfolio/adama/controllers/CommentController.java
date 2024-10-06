@@ -25,18 +25,4 @@ public class CommentController {
                 this.commentService.create(request)
         );
     }
-
-    @GetMapping
-    public @ResponseBody ResponseEntity<List<CommentResponse>> getAll(){
-        return ResponseEntity.status(HttpStatus.CREATED).body(
-                this.commentService.getAll()
-        );
-    }
-
-    @GetMapping("/{id}")
-    public @ResponseBody ResponseEntity<CommentResponse> getById(@PathVariable Long id){
-        return ResponseEntity.status(HttpStatus.CREATED).body(
-                this.commentService.getById(id)
-        );
-    }
 }
