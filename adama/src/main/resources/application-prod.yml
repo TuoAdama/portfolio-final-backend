@@ -1,0 +1,10 @@
+server:
+  port: ${SSL_PORT}
+  ssl:
+    key-store: classpath:${SSL_KEYSTORE}
+    key-store-password: ${SSL_KEY_STORE_PASSWORD}
+    keyStoreType: ${SSL_STORE_TYPE}
+    keyAlias: ${SSL_KEY_ALIAS}
+
+security:
+  require-ssl: ${SSL_REQUIRE}
