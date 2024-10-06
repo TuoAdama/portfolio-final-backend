@@ -7,7 +7,7 @@ spring:
     user:
       default:
         username: ${APP_DEFAULT_USERNAME:tuoadama17@gmail.com}
-        password: ${APP_DEFAULT_PASSWORD:tuoadama}
+        password: ${APP_DEFAULT_PASSWORD:mqGbr$#6Sfa4*l3e2}
 
     security:
       jwt:
