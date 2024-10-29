@@ -1,6 +1,5 @@
 package com.portfolio.adama.config;
 
-import com.portfolio.adama.entities.User;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 
