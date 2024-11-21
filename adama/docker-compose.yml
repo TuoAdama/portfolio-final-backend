@@ -2,13 +2,14 @@ services:
   springapp:
     restart: on-failure
     build: .
+    platform: linux/amd64
     develop:
       watch:
         - action: rebuild
           path: .
           target: /app
     env_file:
-      - .env
+      - .env.local
     ports:
       - "443:8443"
       - "8080:8080"
@@ -21,7 +22,7 @@ services:
     ports:
       - "3306:3306"
     env_file:
-      - .env
+      - .env.local
     volumes:
       - db:/var/lib/mysql
 

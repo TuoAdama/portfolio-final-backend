@@ -1,23 +1,23 @@
 spring:
   profiles:
-    active: ${ENV:default}
+    active: ${ENV}
 
   application:
     name: portfolio-adama
     user:
       default:
-        username: ${APP_DEFAULT_USERNAME:tuoadama17@gmail.com}
-        password: ${APP_DEFAULT_PASSWORD:mqGbr$#6Sfa4*l3e2}
+        username: ${APP_DEFAULT_USERNAME}
+        password: ${APP_DEFAULT_PASSWORD}
 
     security:
       jwt:
-        secretKey: ${JWT_SECRET_KEY:ba6bda2a5a716731358d30f8848ada93d71171a7674dcc34d96a72068a6f65777313df08ec749ca1c47ddf13d715de8f01ecc6c29118c8494db268e022e0d4ce00d722fcb269c773b27c02a95f80fe619d079b097c8747e866a72b1ac978348b73a3e1546299743abdc2786c022c9b6965fd86201a68466857ce15a11c845ca62bc88ab9acea2973f1c2fd0ef6d4e117068c9d157753ed5fbba44df5c9cd981e89c8a68252f69b25be00888671dc2aa94af80859b535f73abc3eb6eee6f8dc3a76eb49a585c4bbc893a969d4f0e2b301e62140c132dfb8bbc16005100c77d32eb03a053c57554df96b9fcb94a1acfdd026744686b5a8d45a1d4e74f4d377307c}
+        secretKey: ${JWT_SECRET_KEY}
         expiration: 2592000000 #one month to milliseconds
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:portfolio}
-    username: ${MYSQL_USER:tuoadama}
-    password: ${MYSQL_PASSWORD:tuoadama}
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
 
   jpa:
     show-sql: true
