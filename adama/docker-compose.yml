@@ -1,6 +1,5 @@
 services:
   springapp:
-    restart: on-failure
     build: .
     platform: linux/amd64
     develop:
