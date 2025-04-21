@@ -4,7 +4,7 @@
 #### Générer un certificat auto-signé
 
 ```shell
-openssl req -x509 -newkey rsa:4096 -keyout privkey.pem -out fullchain.pem -days 365 -nodes
+openssl req -x509 -newkey rsa:4096 -keyout certs/privkey.pem -out certs/fullchain.pem -days 365 -nodes
 ```
 
 #### Convertir en PKCS12
