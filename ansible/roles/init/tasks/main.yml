@@ -1,8 +1,11 @@
 ---
 
-- name: Created build folder on server
+- name: Initialize deploy folder on server
   ansible.builtin.file:
-    path: "{{ remote_build_dir }}"
+    path: "{{ item }}"
     state: directory
     recurse: true
     mode: u=rw,g=rw,o=rw
+  loop:
+    - "{{ remote_build_dir }}"
+    - "{{ release_dir }}"

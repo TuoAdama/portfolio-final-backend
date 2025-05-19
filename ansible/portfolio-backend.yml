@@ -10,6 +10,7 @@
   tags:
     - build
     - init
+    - deploy
 
 - name: Build Portfolio Backend
   hosts:
@@ -24,6 +25,9 @@
   hosts: ionos
   roles:
     - deploy
+  tags:
+    - deploy
+
 
 - name: Clean Portfolio Backend
   hosts: localhost

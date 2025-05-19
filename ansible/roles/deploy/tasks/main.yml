@@ -13,15 +13,14 @@
   when: fichier_docker_compose.stat.exists
 
 
+- name: Link current project folder to release folder
+  file:
+    src: "{{ release_dir }}"
+    dest: "{{ current_project_folder }}"
+    state: link
+
 - name: Extract archive
   unarchive:
-      src: "{{ archive_path }}"
-      dest: "{{ project_dir }}"
-      remote_src: yes
-
-
-- name: Create symlink to current
-  file:
-      src: "{{ project_dir }}"
+      src: "{{ remote_archive_path }}"
       dest: "{{ current_project_folder }}"
-      state: link
+      remote_src: yes
