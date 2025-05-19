@@ -1,0 +1,21 @@
+- name: Archive project
+  archive:
+    path: "{{ playbook_dir | dirname }}/adama/**"
+    dest: "{{ build_path }}"
+    format: gz
+    force_archive: true
+    exclude_path:
+      - "{{ playbook_dir | dirname }}/adama//target"
+      - "{{ playbook_dir | dirname }}/adama/.env.local"
+      - "{{ playbook_dir | dirname }}/adama/Readme.md"
+      - "{{ playbook_dir | dirname }}/adama/.gitignore"
+  when: inventory_hostname == 'localhost'
+
+- name: Copy archive to remote server
+  copy:
+    src: "{{ build_path }}"
+    dest: "{{ remote_build_dir }}"
+    owner: root
+    group: root
+    mode: '0644'
+  when: inventory_hostname != 'localhost'

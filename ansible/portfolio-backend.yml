@@ -1,0 +1,34 @@
+#- name: Build Portfolio Backend
+#  hosts: localhost
+#  roles:
+#    - build
+
+- name: Initialize Portfolio Backend
+  hosts: ionos
+  roles:
+    - init
+  tags:
+    - build
+    - init
+
+- name: Build Portfolio Backend
+  hosts:
+    - localhost
+    - ionos
+  roles:
+    - build
+  tags:
+    - build
+
+- name: Deploy Portfolio Backend
+  hosts: ionos
+  roles:
+    - deploy
+
+- name: Clean Portfolio Backend
+  hosts: localhost
+  roles:
+      - clean
+  tags:
+    - build
+    - clean

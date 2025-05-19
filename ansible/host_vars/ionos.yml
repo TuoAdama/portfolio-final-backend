@@ -1,0 +1,4 @@
+archive_path: "{{ remote_build_dir }}/portfolio-backend.tar.gz"
+current_project_folder: "{{ deploy_path }}/current"
+release_name: "{{ lookup('pipe', 'date +%Y%m%d%H%M%S') }}"
+project_dir: "{{ deploy_path }}/{{ release_name }}"

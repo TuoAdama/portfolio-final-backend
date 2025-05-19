@@ -1,0 +1,8 @@
+---
+
+- name: Created build folder on server
+  ansible.builtin.file:
+    path: "{{ remote_build_dir }}"
+    state: directory
+    recurse: true
+    mode: u=rw,g=rw,o=rw

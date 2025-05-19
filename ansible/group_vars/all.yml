@@ -1,0 +1,5 @@
+build_path: "{{ playbook_dir }}/portfolio-backend.tar.gz"
+
+remote_project_root: "/root/portfolio/portfolio-backend"
+remote_build_dir: "{{ remote_project_root }}/build"
+remote_archive_path: "{{ remote_build_dir }}/portfolio-backend.tar.gz"

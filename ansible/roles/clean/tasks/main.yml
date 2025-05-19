@@ -1,0 +1,5 @@
+---
+- name: Remove archive
+  file:
+    path: "{{ build_path }}"
+    state: absent
