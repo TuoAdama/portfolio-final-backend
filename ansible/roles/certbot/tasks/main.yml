@@ -1,0 +1,28 @@
+- name: Install certbot
+  snap:
+    name: certbot
+    classic: true
+    state: present
+
+- name: Get SSL certificate via certbot standalone
+  command: >
+    certbot certonly --standalone
+    --preferred-challenges http
+    --email {{ certbot_email }}
+    --agree-tos
+    --no-eff-email
+    -d {{ certbot_domain }}
+  args:
+    creates: "/etc/letsencrypt/live/{{ certbot_domain }}/fullchain.pem"
+
+- name: Create renew task with certbot
+  cron:
+    name: "Renouvellement Let's Encrypt avec Certbot (standalone)"
+    job: >
+      certbot renew --quiet
+      --post-hook "{{ certbot_standalone_post_hook_script }}"
+    minute: 0
+    hour: 0
+    month: 2
+    user: root
+  when: certbot_auto_renew

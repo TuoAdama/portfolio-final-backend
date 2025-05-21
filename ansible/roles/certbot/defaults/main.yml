@@ -1,0 +1,5 @@
+certbot_email: "tuoadama17@gmail.com"
+certbot_domain: "api-porfolio.tuo-adama.com"
+certbot_auto_renew: true
+#certbot_standalone_pre_hook_script: "systemctl stop nginx"
+certbot_standalone_post_hook_script: "{{ current_project_folder }}/certificate-renew.sh"

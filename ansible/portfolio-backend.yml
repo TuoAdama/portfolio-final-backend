@@ -38,6 +38,14 @@
     - copy
     - deploy
 
+- name: Generate SSL certificate
+  hosts: ionos
+  roles:
+    - certbot
+  tags:
+    - certificate
+    - deploy
+
 - name: Clean Portfolio Backend
   hosts: localhost
   roles:
