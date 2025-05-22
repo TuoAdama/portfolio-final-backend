@@ -2,4 +2,17 @@ certbot_email: "tuoadama17@gmail.com"
 certbot_domain: "api-porfolio.tuo-adama.com"
 certbot_auto_renew: true
 #certbot_standalone_pre_hook_script: "systemctl stop nginx"
-certbot_standalone_post_hook_script: "{{ current_project_folder }}/certificate-renew.sh"
+
+certificate_path: "/etc/letsencrypt/live/{{ certbot_domain }}/fullchain.pem"
+private_key: "/etc/letsencrypt/live/{{ certbot_domain }}/privkey.pem"
+keystore_output: "{{ current_project_folder }}/src/main/resources/keystore.p12"
+
+keystore_pass: !vault |
+  $ANSIBLE_VAULT;1.1;AES256
+  36623533393434383634623063613735656331623662393430376666383531653365333733366434
+  6330353031353036613263323639633937643663633263310a623836336533623833333461366430
+  65316462353634626530633466653132396263643466386636383931643334383166323434393661
+  6439643966316638350a346162333263336331343232373837306635643761326238373136666266
+  6466
+
+certbot_standalone_post_hook_script: "openssl pkcs12 -export -in {{ certificate_path }} -inkey {{ private_key }} -out {{ keystore_output }} -name portfolio   -CAfile {{ certificate_path }}  -caname root  -passout pass:{{ keystore_pass }}"

@@ -13,7 +13,7 @@
     --no-eff-email
     -d {{ certbot_domain }}
   args:
-    creates: "/etc/letsencrypt/live/{{ certbot_domain }}/fullchain.pem"
+    creates: "{{ certificate_path }}"
 
 - name: Create renew task with certbot
   cron:
