@@ -1,16 +1,9 @@
-#- name: Build Portfolio Backend
-#  hosts: localhost
-#  roles:
-#    - build
-
 - name: Initialize Portfolio Backend
   hosts: ionos
   roles:
     - init
   tags:
     - init
-    - build
-    - deploy
 
 - name: Build Portfolio Backend
   hosts:
@@ -20,7 +13,6 @@
     - build
   tags:
     - build
-    - deploy
 
 - name: Deploy Portfolio Backend
   hosts: ionos
@@ -36,7 +28,6 @@
     - copy
   tags:
     - copy
-    - deploy
 
 - name: Generate SSL certificate
   hosts: ionos
@@ -44,13 +35,20 @@
     - certbot
   tags:
     - certificate
-    - deploy
+
+- name: Launch application
+  hosts: ionos
+  tasks:
+    - name: Launch new release
+      command: docker compose up --build -d
+      args:
+        chdir: "{{ current_project_folder }}"
+  tags:
+      - start_app
 
 - name: Clean Portfolio Backend
   hosts: localhost
   roles:
       - clean
   tags:
-    - build
     - clean
-    - deploy
