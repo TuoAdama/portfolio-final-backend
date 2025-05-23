@@ -3,3 +3,25 @@
   file:
     path: "{{ build_path }}"
     state: absent
+  when: inventory_hostname == 'localhost'
+
+- name: Clean release less than n-1
+  find:
+    paths: "{{ remote_project_root }}"
+    file_type: directory
+    recurse: no
+    excludes: 'current,build,{{ release_dir }}'
+  register: old_releases
+  when: inventory_hostname != 'localhost'
+
+- name: Sort release by date time
+  set_fact:
+    old_releases_sorted: "{{ old_releases.files | sort(attribute='mtime', reverse=true) }}"
+  when: inventory_hostname != 'localhost'
+
+- name: Remove old release
+  file:
+    path: "{{ item.path }}"
+    state: absent
+  loop: "{{ old_releases_sorted[2:] }}"
+  when: inventory_hostname != 'localhost'

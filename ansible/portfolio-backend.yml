@@ -47,7 +47,9 @@
       - start_app
 
 - name: Clean Portfolio Backend
-  hosts: localhost
+  hosts:
+    - localhost
+    - ionos
   roles:
       - clean
   tags:
