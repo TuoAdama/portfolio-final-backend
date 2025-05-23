@@ -21,8 +21,6 @@
     job: >
       certbot renew --quiet
       --post-hook "{{ certbot_standalone_post_hook_script }}"
-    minute: 0
-    hour: 0
     month: 2
     user: root
   when: certbot_auto_renew
