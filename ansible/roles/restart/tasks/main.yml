@@ -1,0 +1,6 @@
+---
+
+- name: Restart application
+  command: docker compose up --build
+  args:
+    chdir: "{{ current_project_folder }}"
