@@ -1,0 +1,6 @@
+---
+
+- name: copy .env.prod file to .env.local
+  copy:
+    src: "{{ env_prod_file_path }}"
+    dest: "{{ current_project_folder }}/.env.local"

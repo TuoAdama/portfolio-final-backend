@@ -2,6 +2,7 @@ services:
   springapp:
     build: .
     platform: linux/amd64
+    restart: on-failure
     develop:
       watch:
         - action: rebuild
@@ -26,6 +27,7 @@ services:
       - db:/var/lib/mysql
 
 volumes:
-  db: {}
+  db:
+    name: portfolio_db
 
 

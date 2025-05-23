@@ -37,3 +37,4 @@ src/main/resources/*.pem
 src/main/resources/*.p12
 
 .env.local
+.env.prod

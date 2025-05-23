@@ -1,0 +1,6 @@
+all:
+  hosts:
+    ionos:
+      ansible_host: 87.106.207.7  # L'adresse IP de ton serveur
+      ansible_user: root        # L'utilisateur SSH pour se connecter au serveur
+      ansible_ssh_private_key_file: ~/.ssh/id_rsa  # La clé privée SSH pour l'authentification

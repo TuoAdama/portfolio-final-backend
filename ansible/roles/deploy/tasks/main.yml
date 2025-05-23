@@ -1,0 +1,26 @@
+---
+
+- name: check if docker-compose file exists
+  stat:
+    path: "{{ current_project_folder }}/docker-compose.yml"
+  register: fichier_docker_compose
+
+
+- name: Stop docker if exists
+  command: docker compose down
+  args:
+    chdir: "{{ current_project_folder }}"
+  when: fichier_docker_compose.stat.exists
+
+
+- name: Link current project folder to release folder
+  file:
+    src: "{{ release_dir }}"
+    dest: "{{ current_project_folder }}"
+    state: link
+
+- name: Extract archive
+  unarchive:
+      src: "{{ remote_archive_path }}"
+      dest: "{{ current_project_folder }}"
+      remote_src: yes
