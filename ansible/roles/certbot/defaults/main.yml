@@ -55,10 +55,6 @@ certificate_path: "/etc/letsencrypt/live/{{ certbot_domain }}/fullchain.pem"
 
 private_key: "/etc/letsencrypt/live/{{ certbot_domain }}/privkey.pem"
 
-keystore_output: "{{ current_project_folder }}/src/main/resources/keystore.p12"
-
-renew_certificate_cmd: "openssl pkcs12 -export -in {{ certificate_path }} -inkey {{ private_key }} -out {{ keystore_output }} -name portfolio   -CAfile {{ certificate_path }}  -caname root  -passout pass:{{ keystore_pass }}"
-
 send_mail_cmd: "curl --url {{ mail_server_dns }} --ssl-reqd --mail-from {{ mail_from }} --mail-rcpt {{ certbot_email }} --upload-file {{ certificate_mail_path }} --user {{ mail_from }}:{{ mail_password }}"
 
-certbot_standalone_post_hook_script: "{{ renew_certificate_cmd }} && {{ send_mail_cmd }}"
+certbot_standalone_post_hook_script: "{{ send_mail_cmd }}"

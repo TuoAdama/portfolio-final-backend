@@ -1,3 +1,6 @@
 archive_path: "{{ remote_build_dir }}/portfolio-backend.tar.gz"
 release_name: "{{ lookup('pipe', 'date +%Y%m%d') }}"
 release_dir: "{{ remote_project_root }}/{{ release_name }}"
+
+domain_name: "api.espace.atuo.fr"
+config_file: "{{ playbook_dir | dirname }}/adama/nginx/conf/nginx.prod.conf"

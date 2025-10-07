@@ -46,6 +46,13 @@
   tags:
       - start_app
 
+- name: Nginx Configuration
+  hosts: ionos
+  roles:
+    - nginx
+  tags:
+    - nginx
+
 - name: Clean Portfolio Backend
   hosts:
     - localhost
