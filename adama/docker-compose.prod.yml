@@ -3,15 +3,9 @@ services:
     build: .
     platform: linux/amd64
     restart: on-failure
-    develop:
-      watch:
-        - action: rebuild
-          path: .
-          target: /app
     env_file:
       - .env.local
     ports:
-      - "444:8443"
       - "8080:8080"
     volumes:
       - .:/home
@@ -20,7 +14,7 @@ services:
   mysqldb:
     image: mysql:8.0.39
     ports:
-      - "3306:3306"
+      - "3310:3306"
     env_file:
       - .env.local
     volumes:
