@@ -3,14 +3,14 @@
 - name: check if docker-compose file exists
   stat:
     path: "{{ current_project_folder }}/docker-compose.yml"
-  register: fichier_docker_compose
+  register: docker_compose_file
 
 
 - name: Stop docker if exists
   command: docker compose down
   args:
     chdir: "{{ current_project_folder }}"
-  when: fichier_docker_compose.stat.exists
+  when: docker_compose_file.stat.exists
 
 
 - name: Link current project folder to release folder
