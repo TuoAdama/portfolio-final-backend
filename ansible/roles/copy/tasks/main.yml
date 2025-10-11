@@ -1,6 +1,15 @@
 ---
-
 - name: copy .env.prod file to .env.local
   copy:
     src: "{{ env_prod_file_path }}"
-    dest: "{{ current_project_folder }}/.env.local"
+    dest: "{{ release_dir }}/.env.local"
+  tags:
+    - copy_env
+
+- name: copy docker-compose.prod.yml to docker-compose.yml
+  copy:
+    src: "{{ release_dir }}/docker-compose.prod.yml"
+    dest: "{{ release_dir }}/docker-compose.yml"
+    remote_src: yes
+  tags:
+    - copy_docker_compose

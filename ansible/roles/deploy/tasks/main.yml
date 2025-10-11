@@ -19,8 +19,9 @@
     dest: "{{ current_project_folder }}"
     state: link
 
-- name: Extract archive
-  unarchive:
-      src: "{{ remote_archive_path }}"
-      dest: "{{ current_project_folder }}"
-      remote_src: yes
+- name: Launch application
+  command: docker compose up --build -d
+  args:
+    chdir: "{{ current_project_folder }}"
+  tags:
+    - start_app

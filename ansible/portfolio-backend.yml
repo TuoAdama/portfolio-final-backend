@@ -5,22 +5,17 @@
   tags:
     - init
 
-- name: Build Portfolio Backend
+# Create archive on localhost and copy it to server then extract it on release folder
+- name: Build project
   hosts:
     - localhost
     - ionos
   roles:
-    - build
+      - archive
   tags:
-    - build
+      - archive
 
-- name: Deploy Portfolio Backend
-  hosts: ionos
-  roles:
-    - deploy
-  tags:
-    - deploy
-
+# Copy necessary files to release folder
 - name: Copy files
   hosts:
     - ionos
@@ -36,22 +31,20 @@
   tags:
     - certificate
 
-- name: Launch application
-  hosts: ionos
-  tasks:
-    - name: Launch new release
-      command: docker compose up --build -d
-      args:
-        chdir: "{{ current_project_folder }}"
-  tags:
-      - start_app
-
 - name: Nginx Configuration
   hosts: ionos
   roles:
     - nginx
   tags:
     - nginx
+
+# Stop old application if exists, link current to new release and start application
+- name: Deploy Portfolio Backend
+  hosts: ionos
+  roles:
+    - deploy
+  tags:
+    - deploy
 
 - name: Clean Portfolio Backend
   hosts:
