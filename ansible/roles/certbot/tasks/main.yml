@@ -4,6 +4,14 @@
     classic: true
     state: present
 
+
+- name: Stop Nginx
+  ansible.builtin.systemd:
+    name: nginx
+    state: stopped
+  tags:
+    - renew-certificate
+
 - name: Get SSL certificate via certbot standalone
   command: >
     certbot certonly --standalone
@@ -14,6 +22,8 @@
     -d {{ certbot_domain }}
   args:
     creates: "{{ certificate_path }}"
+  tags:
+    - renew-certificate
 
 - name: Create renew task with certbot
   cron:
@@ -24,3 +34,10 @@
     month: 2
     user: root
   when: certbot_auto_renew
+
+- name: Start Nginx
+  ansible.builtin.systemd:
+    name: nginx
+    state: started
+  tags:
+    - renew-certificate

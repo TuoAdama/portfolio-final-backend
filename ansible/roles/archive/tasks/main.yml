@@ -10,6 +10,8 @@
       - "{{ playbook_dir | dirname }}/adama/Readme.md"
       - "{{ playbook_dir | dirname }}/adama/.gitignore"
   when: inventory_hostname == 'localhost'
+  tags:
+    - archive
 
 - name: Copy archive to remote server
   copy:
@@ -18,4 +20,16 @@
     owner: root
     group: root
     mode: '0644'
+  when: inventory_hostname != 'localhost'
+  tags:
+    - copy_archive
+
+
+- name: Extract archive
+  unarchive:
+    src: "{{ remote_archive_path }}"
+    dest: "{{ release_dir }}"
+    remote_src: yes
+  tags:
+    - unarchive
   when: inventory_hostname != 'localhost'

@@ -1,2 +1,6 @@
 .idea/
 ansible/portfolio-backend.tar.gz
+
+adama/nginx/log/access.log
+adama/nginx/log/error.log
+adama/nginx/ssl/*

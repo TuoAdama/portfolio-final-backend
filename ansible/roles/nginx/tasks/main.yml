@@ -1,0 +1,56 @@
+- name: Create logs directory
+  file:
+    path: "/var/log/nginx/{{ domain_name }}"
+    recurse: true
+    state: directory
+    mode: '0666'
+  tags:
+    - setup_nginx_log_files
+
+- name: Create logs files
+  file:
+    path: "{{ item }}"
+    state: touch
+    mode: '0666'
+  loop:
+    - "/var/log/nginx/{{ domain_name }}/access_log"
+    - "/var/log/nginx/{{ domain_name }}/error_log"
+  tags:
+    - setup_nginx_log_files
+
+
+- name: Deploy Nginx configuration
+  copy:
+    src: "{{ config_file }}"
+    dest: "/etc/nginx/sites-available/{{ domain_name }}"
+    owner: root
+    group: root
+    mode: '0644'
+  tags:
+    - copy_nginx_config_file
+
+- name: Activate Nginx configuration
+  file:
+    src: "/etc/nginx/sites-available/{{ domain_name }}"
+    dest: "/etc/nginx/sites-enabled/{{ domain_name }}"
+    state: link
+    force: yes
+  tags:
+    - enable_nginx_config_file
+
+- name: Test Nginx configuration
+  command: nginx -t
+  register: nginx_test
+  ignore_errors: yes
+  tags:
+    - test_nginx_config_file
+
+- name: Show Nginx test result
+  debug:
+    var: nginx_test.stdout_lines
+
+- name: Reload Nginx
+  service:
+    name: nginx
+    state: reloaded
+  when: nginx_test.rc == 0
