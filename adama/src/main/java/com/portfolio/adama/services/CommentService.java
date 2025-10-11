@@ -24,7 +24,7 @@ public class CommentService {
         Comment comment = this.commentMapper.fromRequestToComment(commentRequest);
         this.commentRepository.save(comment);
 
-        MailService.Mail mail = new MailService.Mail("tuoadama17@gmail.com","Commentaire réçu",
+        MailService.Mail mail = new MailService.Mail("tuoadama17@gmail.com","Nouveau commentaire sur votre portfolio",
                 "Sujet: " + comment.getSubject() + "\n" +
                 "Email: " + comment.getEmail() + "\n" +
                 "Message: " + comment.getBody() + "\n"
