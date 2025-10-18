@@ -1,8 +1,8 @@
 FROM maven:3.8.5-openjdk-17 AS maven-build
 LABEL authors="tuoadama"
 WORKDIR /app
-COPY pom.xml /app/pom.xml
-COPY src /app/src
+COPY adama/pom.xml /app/pom.xml
+COPY adama/src /app/src
 RUN mvn clean package -DskipTests
 
 FROM openjdk:17-jdk-alpine
