@@ -2,24 +2,17 @@ services:
   springapp:
     build: .
     platform: linux/amd64
-    restart: on-failure
-    env_file:
-      - .env.local
-    ports:
-      - "8080:8080"
     volumes:
-      - .:/home
+      - type: bind
+        source: .
+        target: /home
+        is_directory: true
     depends_on:
       - mysqldb
   mysqldb:
     image: mysql:8.0.39
-    ports:
-      - "3310:3306"
-    env_file:
-      - .env.local
     volumes:
       - db:/var/lib/mysql
-
 volumes:
   db:
     name: portfolio_db
