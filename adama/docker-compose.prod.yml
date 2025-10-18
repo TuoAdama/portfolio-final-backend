@@ -6,6 +6,7 @@ services:
       - type: bind
         source: .
         target: /home
+        is_directory: true
     depends_on:
       - mysqldb
   mysqldb:
